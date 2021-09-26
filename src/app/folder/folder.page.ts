@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from '../services/auth.service';
+import { GastosUsuarioService } from '../services/gastos-usuario.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,8 +14,14 @@ export class FolderPage implements OnInit {
   public folder: string;
   item$: Observable<any[]>;
 
-  constructor(private activatedRoute: ActivatedRoute, firestore: AngularFirestore) {
-    this.item$ = firestore.collection('gastos').valueChanges();
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    firestore: AngularFirestore,
+    private gastosusuarioService: GastosUsuarioService) {
+
+    gastosusuarioService.loadUserId();
+    this.item$ = gastosusuarioService.getGastosUsuario();
+
    }
 
 
