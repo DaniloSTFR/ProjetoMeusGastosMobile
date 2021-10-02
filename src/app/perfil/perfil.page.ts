@@ -7,20 +7,25 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['perfil.page.scss']
 })
 export class PerfilPage {
-
+  public autenticacao: string;
   email = '';
   senha = '';
 
   constructor(
     private authService: AuthService,
     private navCtrl: NavController
-    ) {}
+  ) { this.autenticacao = '';}
 
-  async efetuarLogin(){
+  async efetuarLogin() {
     console.log('Efetuando o Login...');
-    const result = await this.authService.login(this.email, this.senha);
-    if(result) {
-      this.navCtrl.navigateRoot('folder/Inbox');
+    try {
+      const result = await this.authService.login(this.email, this.senha);
+      if (result) {
+        this.navCtrl.navigateRoot('folder/Inbox');
+      }
+    } catch (error) {
+      console.log('Fallha no login, Usuário ou Senha incorretos.');
+      this.autenticacao = 'Fallha no login, Usuário ou Senha incorretos.';
     }
 
   }

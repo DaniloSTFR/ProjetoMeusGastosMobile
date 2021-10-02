@@ -17,17 +17,21 @@ export class FolderPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     firestore: AngularFirestore,
-    private gastosusuarioService: GastosUsuarioService) {
+    public gastosusuarioService: GastosUsuarioService) {
 
-    gastosusuarioService.loadUserId();
-    this.item$ = gastosusuarioService.getGastosUsuario();
-
+   this.carregarItem();
    }
 
-
+   async carregarItem(){
+    await this.gastosusuarioService.loadUserId();
+    this.item$ = this.gastosusuarioService.getGastosUsuario();
+   }
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    //this.carregarItem();
+    //this.gastosusuarioService.loadUserId();
+    //this.item$ = this.gastosusuarioService.getGastosUsuario();
   }
 
 }
