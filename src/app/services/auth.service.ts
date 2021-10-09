@@ -36,8 +36,9 @@ export class AuthService {
     }
   }
 
-  logout(){
-
+  async logout(){
+      await this.fireAuth.signOut();
+      return true;
   }
 
 }
