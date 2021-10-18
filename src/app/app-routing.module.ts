@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'pefil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'cadastrar',
+    loadChildren: () => import('./cadastrar/cadastrar.module').then( m => m.CadastrarPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      Cadastrar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nome</ion-label>
+    <ion-input [(ngModel)]="user.nome" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">E-mail</ion-label>
+    <ion-input [(ngModel)]="user.email" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Senha</ion-label>
+    <ion-input [(ngModel)]="user.senha" type="password"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Idade</ion-label>
+    <ion-input [(ngModel)]="user.idade" type="number"></ion-input>
+  </ion-item>
+
+  <ion-list>
+    <ion-radio-group [(ngModel)]="user.esdadoCivil">
+      <ion-list-header>
+        <ion-label>Estado Civil</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let estadoCivil of estadosCivis; let i = index;">
+        <ion-label>{{estadoCivil}}</ion-label>
+        <ion-radio slot="end" value="{{i}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-list>
+    <ion-radio-group [(ngModel)]="user.formacao">
+      <ion-list-header>
+        <ion-label>Escolaridade</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let escolaridade of escolaridades; let i = index;">
+        <ion-label>{{escolaridade}}</ion-label>
+        <ion-radio slot="end" value="{{i}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-list>
+    <ion-radio-group [(ngModel)]="user.genero">
+      <ion-list-header>
+        <ion-label>Gênero</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let genero of generos; let i = index;">
+        <ion-label>{{genero}}</ion-label>
+        <ion-radio slot="end" value={{i}}></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-button expand="block" (click)="cadastrar()">Salvar</ion-button>
+  <ion-button expand="block" color="danger" (click)="voltar()">Voltar</ion-button>
+</ion-content>

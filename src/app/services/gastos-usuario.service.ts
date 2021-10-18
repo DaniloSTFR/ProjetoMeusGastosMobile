@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class GastosUsuarioService {
-  userId=null;
+  public userId=null;
 
 
   constructor(

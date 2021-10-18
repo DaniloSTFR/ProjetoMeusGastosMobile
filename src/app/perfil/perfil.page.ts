@@ -21,13 +21,17 @@ export class PerfilPage {
     try {
       const result = await this.authService.login(this.email, this.senha);
       if (result) {
-        this.navCtrl.navigateRoot('folder/Inbox');
+        this.navCtrl.navigateRoot('folder/Inicio');
       }
     } catch (error) {
       console.log('Fallha no login, Usuário ou Senha incorretos.');
       this.autenticacao = 'Fallha no login, Usuário ou Senha incorretos.';
     }
 
+  }
+
+  cadastrar() {
+    this.navCtrl.navigateRoot('cadastrar');
   }
 
 }
