@@ -20,27 +20,41 @@
     <ion-input [(ngModel)]="user.senha" type="password"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Idade</ion-label>
-    <ion-input [(ngModel)]="user.idade" type="number"></ion-input>
+    <ion-label position="floating">Repetir senha</ion-label>
+    <ion-input [(ngModel)]="user.repetirSenha" type="password"></ion-input>
   </ion-item>
 
+  <ion-item>
+    <ion-label>Data de Nascimento</ion-label>
+    <ion-datetime
+      [(ngModel)] = "user.dataNascimento"
+      value="01-01-1991" min="1930-01" max="2030"
+      [dayShortNames]="customDayShortNames"
+      displayFormat="DD MMM, YYYY"
+      cancelText="Cancelar"
+      doneText="OK"
+      monthShortNames="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez"
+       ></ion-datetime>
+  </ion-item>
+
+  <ion-item-divider></ion-item-divider>
   <ion-list>
     <ion-radio-group [(ngModel)]="user.esdadoCivil">
       <ion-list-header>
-        <ion-label>Estado Civil</ion-label>
+        <ion-label class="my-label" >Estado Civil</ion-label>
       </ion-list-header>
 
       <ion-item *ngFor="let estadoCivil of estadosCivis; let i = index;">
-        <ion-label>{{estadoCivil}}</ion-label>
+        <ion-label >{{estadoCivil}}</ion-label>
         <ion-radio slot="end" value="{{i}}"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
-
+  <ion-item-divider></ion-item-divider>
   <ion-list>
     <ion-radio-group [(ngModel)]="user.formacao">
       <ion-list-header>
-        <ion-label>Escolaridade</ion-label>
+        <ion-label class="my-label" >Escolaridade</ion-label>
       </ion-list-header>
 
       <ion-item *ngFor="let escolaridade of escolaridades; let i = index;">
@@ -49,11 +63,11 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>
-
+  <ion-item-divider></ion-item-divider>
   <ion-list>
     <ion-radio-group [(ngModel)]="user.genero">
       <ion-list-header>
-        <ion-label>Gênero</ion-label>
+        <ion-label class="my-label" >Gênero</ion-label>
       </ion-list-header>
 
       <ion-item *ngFor="let genero of generos; let i = index;">
@@ -62,6 +76,10 @@
       </ion-item>
     </ion-radio-group>
   </ion-list>
+  <ion-item-divider></ion-item-divider>
+  <ion-toolbar>
+    <ion-title size="small" color="danger">{{ erroMsn }}</ion-title>
+  </ion-toolbar>
 
   <ion-button expand="block" (click)="cadastrar()">Salvar</ion-button>
   <ion-button expand="block" color="danger" (click)="voltar()">Voltar</ion-button>

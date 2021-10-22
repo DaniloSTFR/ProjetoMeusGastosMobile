@@ -47,11 +47,13 @@ export class AuthService {
       this.firestore.doc('du_usuario/'+result.user.uid).set({
         nome: user.nome,
         email: user.email,
-        dataCriacao: '',
-        dataNascimento: new Date(),
+        dataCriacao: new Date(),
+        dataNascimento: new Date(Date.parse(user.dataNascimento)),
         formacao: this.formacao[user.formacao],
         esdadoCivil: this.estadoCivil[user.esdadoCivil],
-        genero: this.genero[user.genero]
+        genero: this.genero[user.genero],
+        tipoUsuario: 'user',
+        uuid_Usuario:result.user.uid
       });
       this.userId = result.user.uid;
       return true;
