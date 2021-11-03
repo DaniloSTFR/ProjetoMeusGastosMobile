@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { logging } from 'selenium-webdriver';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import firebase from 'firebase/app';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +14,7 @@ export class AuthService {
   public userId = null;
   public user: any;
   public estaLogado = false;
+  public listaUser: Observable<any[]>;
 
   public formacao = [
     'Ensino Médio'
@@ -61,17 +65,30 @@ export class AuthService {
     return false;
   }
 
-  carregaDadosDoUsuario(){
-    this.firestore.doc('du_usuario/'+this.userId).valueChanges({idField: 'docId'}).subscribe(user => {
+  async carregaDadosDoUsuario(){
+    await this.firestore.doc('du_usuario/'+this.userId).valueChanges({idField: 'docId'}).subscribe(user => {
       this.user = user;
     });
   }
+  async updateDuUsuario(duUsuario){
+    await this.firestore.doc('du_usuario/'+duUsuario.docId).update(duUsuario);
+  }
+
+
+  async getDadosUsuario(){ //pega os dados doUsuario
+    this.userId = firebase.auth().currentUser.uid;
+    console.log(firebase.auth().currentUser);
+    console.log(this.userId);
+    return this.listaUser=this.firestore.collection<any>('du_usuario', ref => ref.where('uuid_Usuario', '==', this.userId)).valueChanges();
+  }
+
 
   async login(email, senha){
     const result = await this.fireAuth.signInWithEmailAndPassword(email, senha);
     if(result.user) {
-      console.log(result.user.uid);
+     // console.log(result.user.uid);
       this.userId = result.user.uid;
+      this.carregaDadosDoUsuario();
       this.estaLogado = true;
       return true;
     }
@@ -87,16 +104,10 @@ export class AuthService {
   }
 
   async loadUserId(){
-    try {
-      await this.fireAuth.currentUser.then( user => {
-        this.userId = user.uid;
-        console.log(user);
-      });
-
-      return true;
-    }catch (err) {
-      return false;
-    }
+    await this.fireAuth.currentUser.then( user => {
+      this.userId = user.uid;
+      //console.log(user);
+    });
   }
 
   async userIsAuthenticated(){

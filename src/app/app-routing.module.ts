@@ -4,6 +4,14 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'perfil',
     //redirectTo: 'folder/Inbox',
     //pathMatch: 'full'
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
@@ -13,13 +21,14 @@ const routes: Routes = [
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
-    path: 'pefil',
-    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+    path: 'explore',
+    loadChildren: () => import('./explore-container/explore-container.module').then( m => m.ExploreContainerComponentModule)
   },
   {
     path: 'cadastrar',
     loadChildren: () => import('./cadastrar/cadastrar.module').then( m => m.CadastrarPageModule)
   },
+
 ];
 
 @NgModule({

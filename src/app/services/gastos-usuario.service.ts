@@ -19,13 +19,13 @@ export class GastosUsuarioService {
   async loadUserId(){
     await this.fireAuth.currentUser.then( user => {
       this.userId = user.uid;
-      console.log(user);
+      //console.log(user);
     });
   }
 
 
   getGastosUsuario(){ //pega os gatos do Usuario
-    console.log('user:'+this.userId );
+    //console.log('user:'+this.userId );
      return this.firestore.collection('df_gastosUsuario',
     ref => ref
       .where('uuid_Usuario','==', this.userId)

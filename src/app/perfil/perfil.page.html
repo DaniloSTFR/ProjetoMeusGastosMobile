@@ -1,24 +1,92 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="ion-text-center">
-      Acessar
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dados de perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content >
+  <ion-item>
+    <ion-label position="floating">Nome</ion-label>
+    <ion-input [(ngModel)]="user.nome" ></ion-input>
+  </ion-item>
   <ion-item>
     <ion-label position="floating">E-mail</ion-label>
-    <ion-input [(ngModel)]="email" ></ion-input>
+    <ion-input [(ngModel)]="user.email" disabled ></ion-input>
+  </ion-item>
+ <!--  <ion-item>
+    <ion-label position="floating">Senha</ion-label>
+    <ion-input [(ngModel)]="user.senha" type="password"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Senha</ion-label>
-    <ion-input [(ngModel)]="senha" type="password"></ion-input>
+    <ion-label position="floating">Repetir senha</ion-label>
+    <ion-input [(ngModel)]="user.repetirSenha" type="password"></ion-input>
+  </ion-item> -->
+  <ion-item>
+    <ion-label position="floating">Salário R$</ion-label>
+    <ion-input [(ngModel)]="user.salario" ></ion-input>
   </ion-item>
-  <ion-button expand="block" (click)="efetuarLogin()">Entrar</ion-button>
-  <ion-toolbar>
-    <ion-title size="small" color="danger">{{ autenticacao }}</ion-title>
-  </ion-toolbar>
-  <ion-button expand="block" color="danger" (click)="cadastrar()">Cadastrar</ion-button>
 
+  <ion-item>
+    <ion-label>Data de Nascimento</ion-label>
+    <ion-datetime
+      [(ngModel)] = "user.dataNascimento"
+      value="{{timestampSTR}}"
+       min="1930-01" max="2030"
+      [dayShortNames]="customDayShortNames"
+      displayFormat="DD MMM, YYYY"
+      cancelText="Cancelar"
+      doneText="OK"
+      monthShortNames="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez"
+       ></ion-datetime>
+  </ion-item>
+
+  <ion-item-divider></ion-item-divider>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="user.esdadoCivil" value="{{user.esdadoCivil}}">
+      <ion-list-header>
+        <ion-label class="my-label" >Estado Civil</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let estadoCivil of estadosCivis; let i = index;">
+        <ion-label >{{estadoCivil}}</ion-label>
+        <ion-radio slot="end" value="{{estadoCivil}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-item-divider></ion-item-divider>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="user.formacao" value="{{user.formacao}}">
+      <ion-list-header>
+        <ion-label class="my-label" >Escolaridade</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let escolaridade of escolaridades; let i = index;">
+        <ion-label>{{escolaridade}}</ion-label>
+        <ion-radio slot="end" value="{{escolaridade}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-item-divider></ion-item-divider>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="user.genero" value="{{user.genero}}">
+      <ion-list-header>
+        <ion-label class="my-label" >Gênero</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let genero of generos; let i = index;">
+        <ion-label>{{genero}}</ion-label>
+        <ion-radio slot="end" value={{genero}}></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-item-divider></ion-item-divider>
+  <ion-toolbar>
+    <ion-title size="small" color="danger">{{ erroMsn }}</ion-title>
+  </ion-toolbar>
+
+  <ion-button expand="block" (click)="updateDuUsuario()">Salvar</ion-button>
+  <ion-button expand="block" color="danger" (click)="voltar()">Voltar</ion-button>
 </ion-content>

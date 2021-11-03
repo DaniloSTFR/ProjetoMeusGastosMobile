@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     { title: 'Início', url: '/folder/Inicio', icon: 'home' },
     { title: 'Cadastrar gastos', url: '/folder/CadastrarGastos', icon: 'wallet' },
     { title: 'Balanço', url: '/folder/Balanco', icon: 'bar-chart' },
-    { title: 'Customizar', url: '/folder/Customizar', icon: 'extension-puzzle' },
+    { title: 'Perfil', url: '/perfil', icon: 'extension-puzzle' },
     { title: 'Notificações', url: '/folder/Notificacoes', icon: 'warning' },
     { title: 'Sair', url: '/folder/Sair', icon: 'exit' },
   ];

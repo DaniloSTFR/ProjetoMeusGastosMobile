@@ -75,7 +75,7 @@ export class CadastrarPage implements OnInit {
   }
 
   voltar() {
-    this.navCtrl.navigateRoot('pefil');
+    this.navCtrl.navigateRoot('login');
   }
 
 }
