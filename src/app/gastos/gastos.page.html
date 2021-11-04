@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Gastos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating">Descrição:</ion-label>
+    <ion-input [(ngModel)]="gasto.descricao" ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Valor: R$</ion-label>
+    <ion-input [(ngModel)]="gasto.valorGasto" ></ion-input>
+  </ion-item>
+
+  <ion-item-divider></ion-item-divider>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="gasto.tipoGasto">
+      <ion-list-header>
+        <ion-label class="my-label" >Tipo de Gasto</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let tipo of tipodeGasto; let i = index;">
+        <ion-label >{{tipo}}</ion-label>
+        <ion-radio slot="end" value="{{i}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-item-divider></ion-item-divider>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="gasto.formaPagamento">
+      <ion-list-header>
+        <ion-label class="my-label" >Forma de pagamento</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let forma of formaPagamento; let i = index;">
+        <ion-label >{{forma}}</ion-label>
+        <ion-radio slot="end" value="{{i}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-toolbar>
+    <ion-title size="small" color="danger">{{ erroMsn }}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title size="small" color="primary">{{ okMsn }}</ion-title>
+  </ion-toolbar>
+
+  <ion-item-divider></ion-item-divider>
+  <ion-button expand="block" (click)="cadastrarGastos()">Salvar</ion-button>
+
+</ion-content>

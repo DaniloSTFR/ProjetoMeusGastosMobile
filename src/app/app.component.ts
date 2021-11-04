@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   public appPages = [
     { title: 'Início', url: '/folder/Inicio', icon: 'home' },
-    { title: 'Cadastrar gastos', url: '/folder/CadastrarGastos', icon: 'wallet' },
+    { title: 'Cadastrar gastos', url: '/gastos', icon: 'wallet' },
     { title: 'Balanço', url: '/folder/Balanco', icon: 'bar-chart' },
     { title: 'Perfil', url: '/perfil', icon: 'extension-puzzle' },
     { title: 'Notificações', url: '/folder/Notificacoes', icon: 'warning' },

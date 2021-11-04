@@ -39,7 +39,7 @@ export class PerfilPage implements OnInit {
     firestore: AngularFirestore
   ) {
 
-    this.carregaDadosModelo();
+    //this.carregaDadosModelo();
   }
 
   async carregaDadosModelo() {
@@ -75,7 +75,7 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit() {
-    //this.carregaDadosModelo();
+    this.carregaDadosModelo();
   }
 
   async updateDuUsuario() {

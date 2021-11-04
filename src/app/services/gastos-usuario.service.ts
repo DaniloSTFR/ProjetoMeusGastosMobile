@@ -8,6 +8,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class GastosUsuarioService {
   public userId=null;
 
+  public formaPagamento = [
+    'Dinheiro'
+  , 'Cartão Crédito'
+  , 'Cartão Débito'
+  , 'Boleto'
+  , 'Outros'
+  ];
+
+  public tipodeGasto = [
+    'Fixo'
+  , 'Variável'
+  ];
 
   constructor(
     private fireAuth: AngularFireAuth,
@@ -30,8 +42,20 @@ export class GastosUsuarioService {
     ref => ref
       .where('uuid_Usuario','==', this.userId)
       ).valueChanges();
+  }
 
-    return this.firestore.collection('df_gastosUsuario').valueChanges();
+  async registrarGasto(gasto){
+    await this.loadUserId();
+
+    this.firestore.collection('df_gastosUsuario').add({
+      descricao: gasto.descricao,
+      formaPagamento: this.formaPagamento[gasto.formaPagamento],
+      tipoGasto: this.tipodeGasto[gasto.tipoGasto],
+      valorGasto: Number(gasto.valorGasto),
+      dataCriacao: new Date(),
+      uuid_Usuario: this.userId
+    });
+
   }
 
 }

@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'cadastrar',
     loadChildren: () => import('./cadastrar/cadastrar.module').then( m => m.CadastrarPageModule)
   },
+  {
+    path: 'gastos',
+    loadChildren: () => import('./gastos/gastos.module').then( m => m.GastosPageModule)
+  },
 
 ];
 
