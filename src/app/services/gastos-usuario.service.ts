@@ -41,7 +41,7 @@ export class GastosUsuarioService {
      return this.firestore.collection('df_gastosUsuario',
     ref => ref
       .where('uuid_Usuario','==', this.userId)
-      ).valueChanges();
+      ).valueChanges({idField: 'docId'});
   }
 
   async registrarGasto(gasto){
@@ -57,5 +57,10 @@ export class GastosUsuarioService {
     });
 
   }
+
+  async excluirGasto(indiceColecao:any){
+    this.firestore.doc('df_gastosUsuario/'+indiceColecao).delete();
+  }
+
 
 }

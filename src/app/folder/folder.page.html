@@ -16,7 +16,7 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-subtitle>Meu saldo</ion-card-subtitle>
       <ion-card-title>Card Title</ion-card-title>
     </ion-card-header>
 
@@ -26,14 +26,41 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of item$ | async">
-          <ion-label> {{ item.descricao }} - {{ item.tipoGasto}} - {{ item.valorGasto}}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+
+  <ion-item *ngFor="let item of item$ | async">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-lg>
+          <strong>{{ item.descricao }}</strong>
+          <br>
+        </ion-col>
+        <ion-col size="12" size-lg>
+          {{ item.tipoGasto }}
+          <br>
+        </ion-col>
+        <ion-col size="12" size-lg>
+          {{ item.formaPagamento }}
+          <br>
+        </ion-col>
+
+        <ion-col size="12" size-lg>
+          {{ getDatas(item.dataCriacao) }}
+          <br>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-align-self-start" size="12" size-md>
+            <strong>R$ {{ item.valorGasto}}</strong>
+            <br><ion-button color="primary" size="small" (click)="editar(item.docId)">EDITAR </ion-button>
+            <br><ion-button color="danger" size="small" (click)="excluir(item.docId)">EXCLUIR</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-item>
 
 </ion-content>

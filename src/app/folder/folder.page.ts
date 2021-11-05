@@ -29,7 +29,14 @@ export class FolderPage implements OnInit {
    async carregarItem(){
     await this.gastosusuarioService.loadUserId();
     this.item$ = this.gastosusuarioService.getGastosUsuario();
+    console.log( this.item$[0]);
    }
+
+   public getDatas( dataCriacao) {
+    const timestamp = new Date(dataCriacao.seconds * 1000);
+    const timestampSTR = timestamp.getDate() + '-'+ (timestamp.getMonth() + 1) + '-'  + timestamp.getFullYear();
+    return timestampSTR;
+  }
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
@@ -52,4 +59,18 @@ export class FolderPage implements OnInit {
       console.log('Fallha no efetuar Logout.');
     }
   }
+
+  async editar( id) {
+    console.log('editar:',id);
+  }
+
+  async excluir( id) {
+    try {
+      await this.gastosusuarioService.excluirGasto(id);
+    } catch (error) {
+      console.log('Fallha ao fazer exclusão');
+    }
+  }
+
+
 }
