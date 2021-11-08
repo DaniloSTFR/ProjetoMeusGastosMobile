@@ -7,7 +7,32 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title>Maiores gatos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barChart style="position: relative; height:20vh; width:40vw"></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title>Gastos por tipo de pagamento do ultimo mês</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title>Por mês</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

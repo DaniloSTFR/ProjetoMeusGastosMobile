@@ -1,4 +1,4 @@
-import {AfterViewInit, ElementRef, ViewChild, Component } from '@angular/core';
+import {AfterViewInit, ElementRef, ViewChild, Component,OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../services/auth.service';
@@ -7,7 +7,10 @@ import { GastomodelPage } from '../gastomodel/gastomodel.page';
 import { ModalController, NavController, AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
-import { Chart } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
+import {CategoryScale} from 'chart.js';
+Chart.register(CategoryScale);
 
 
 
@@ -16,15 +19,11 @@ import { Chart } from 'chart.js';
   templateUrl: './folder.page.html',
   styleUrls: ['./folder.page.scss'],
 })
-export class FolderPage implements AfterViewInit  {
+export class FolderPage implements OnInit {
 
-  @ViewChild('barCanvas') private barCanvas: ElementRef;
-  @ViewChild('doughnutCanvas') private doughnutCanvas: ElementRef;
-  @ViewChild('lineCanvas') private lineCanvas: ElementRef;
+  @ViewChild('doughnutCanvas')  doughnutCanvas;
 
-  barChart: any;
   doughnutChart: any;
-  lineChart: any;
 
   public folder: string;
   public status: string;
@@ -44,6 +43,10 @@ export class FolderPage implements AfterViewInit  {
     this.carregarItem();
   }
 
+  ionViewDidEnter() {
+    this.doughnutChartMethod();
+  }
+
   async carregarItem() {
     await this.gastosusuarioService.loadUserId();
     this.item$ = this.gastosusuarioService.getGastosUsuario();
@@ -56,15 +59,33 @@ export class FolderPage implements AfterViewInit  {
     return timestampSTR;
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.folder === 'Sair') {
       this.efetuarLogout();
     }
-/*     this.barChartMethod();
-    this.doughnutChartMethod();
-    this.lineChartMethod(); */
 
+  }
+
+  doughnutChartMethod() {
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+      type: 'doughnut',
+      data: {
+        labels: ['Credito', 'Débitos'],
+        datasets: [{
+          label: '# por tipo PG',
+          data: [1500, 4500,],
+          backgroundColor: [
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(255, 99, 132, 0.2)'
+          ],
+          hoverBackgroundColor: [
+            '#32CD32',
+            '#FF6347'
+          ]
+        }]
+      }
+    });
   }
 
   async efetuarLogout() {

@@ -14,15 +14,14 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Meu saldo</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
-    </ion-card-header>
 
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title>Saldo Atual</ion-card-title>
+      <ion-card-subtitle>Salário: R$ 6.000,00</ion-card-subtitle>
+    </ion-card-header>
     <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
     </ion-card-content>
   </ion-card>
 
@@ -63,8 +62,10 @@
         <ion-row>
           <ion-col class="ion-align-self-start" size="12" size-md>
             <strong>R$ {{ item.valorGasto}}</strong>
-            <br><ion-button color="primary" size="small" (click)="editarModelGatos(item)">EDITAR </ion-button>
-            <br><ion-button color="danger" size="small" (click)="abrirConfirmacaoDialogue(item.docId)">EXCLUIR</ion-button>
+            <br>
+            <ion-button color="primary" size="small" (click)="editarModelGatos(item)">EDITAR </ion-button>
+            <br>
+            <ion-button color="danger" size="small" (click)="abrirConfirmacaoDialogue(item.docId)">EXCLUIR</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
