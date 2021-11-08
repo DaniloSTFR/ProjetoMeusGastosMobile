@@ -32,6 +32,22 @@ const routes: Routes = [
     path: 'gastos',
     loadChildren: () => import('./gastos/gastos.module').then( m => m.GastosPageModule)
   },
+  {
+    path: 'gastomodel',
+    loadChildren: () => import('./gastomodel/gastomodel.module').then( m => m.GastomodelPageModule)
+  },
+  {
+    path: 'ajuda',
+    loadChildren: () => import('./ajuda/ajuda.module').then( m => m.AjudaPageModule)
+  },
+  {
+    path: 'balanco',
+    loadChildren: () => import('./balanco/balanco.module').then( m => m.BalancoPageModule)
+  },
+  {
+    path: 'notificacoes',
+    loadChildren: () => import('./notificacoes/notificacoes.module').then( m => m.NotificacoesPageModule)
+  },
 
 ];
 

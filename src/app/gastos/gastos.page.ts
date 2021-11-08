@@ -19,11 +19,13 @@ export class GastosPage implements OnInit {
     descricao: '',
     formaPagamento: 0,
     tipoGasto: 0,
-    valorGasto: 0.0
+    valorGasto: 0.0,
+    categoria: 0
   };
 
   tipodeGasto: Array<string>;
   formaPagamento: Array<string>;
+  categorias: Array<string>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,6 +40,7 @@ export class GastosPage implements OnInit {
   carregaDadosModelo() {
     this.tipodeGasto = this.gastosusuarioService.tipodeGasto;
     this.formaPagamento = this.gastosusuarioService.formaPagamento;
+    this.categorias = this.gastosusuarioService.categoria;
   }
 
   ngOnInit() {
@@ -55,8 +58,8 @@ export class GastosPage implements OnInit {
     }
   }
 
-   timeout(ms) {
+  timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
+  }
 
 }

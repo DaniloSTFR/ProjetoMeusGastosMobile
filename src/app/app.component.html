@@ -5,7 +5,6 @@
           <ion-list id="inbox-list">
             <ion-list-header>Meus Gastos</ion-list-header><ion-icon name="skull-outline"></ion-icon>
             <ion-note>danilo.santosfr@gmail.com</ion-note>
-
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
               <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
                 <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
@@ -16,11 +15,12 @@
 
           <ion-list id="labels-list">
             <ion-list-header>Sobre</ion-list-header>
-
-            <ion-item *ngFor="let label of labels" lines="none">
-              <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
-            </ion-item>
+            <ion-menu-toggle auto-hide="false" *ngFor="let l of labels; let i = index">
+              <ion-item routerDirection="root" [routerLink]="[l.url]" lines="none" detail="false" routerLinkActive="selected">
+                <ion-icon slot="start" [ios]="l.icon + '-outline'" [md]="l.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ l.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
           </ion-list>
         </ion-content>
       </ion-menu>

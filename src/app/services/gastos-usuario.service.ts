@@ -21,6 +21,22 @@ export class GastosUsuarioService {
   , 'Variável'
   ];
 
+  public categoria = [
+    'Alimentação',
+    'Bem-Estar',
+    'Conveniência',
+    'Cultura e Entretenimento',
+    'Educação',
+    'Gastos Residênciais',
+    'Mobilidade',
+    'Moradia',
+    'Refeição',
+    'Saúde',
+    'Vestuário',
+    'Outras despesas variáveis.'
+  ];
+
+
   constructor(
     private fireAuth: AngularFireAuth,
     private firestore: AngularFirestore
@@ -41,6 +57,7 @@ export class GastosUsuarioService {
      return this.firestore.collection('df_gastosUsuario',
     ref => ref
       .where('uuid_Usuario','==', this.userId)
+      .orderBy('dataCriacao', 'desc')
       ).valueChanges({idField: 'docId'});
   }
 
@@ -53,13 +70,18 @@ export class GastosUsuarioService {
       tipoGasto: this.tipodeGasto[gasto.tipoGasto],
       valorGasto: Number(gasto.valorGasto),
       dataCriacao: new Date(),
+      categoria: gasto.categoria,
       uuid_Usuario: this.userId
     });
 
   }
 
-  async excluirGasto(indiceColecao:any){
+  async excluirGasto(indiceColecao){
     this.firestore.doc('df_gastosUsuario/'+indiceColecao).delete();
+  }
+
+  async updateGasto(gasto){
+    await this.firestore.doc('df_gastosUsuario/'+gasto.docId).update(gasto);
   }
 
 

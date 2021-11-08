@@ -1,21 +1,35 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Cadastrar Gastos</ion-title>
+    <ion-title>Editar Gastos</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
 
-  <ion-item>
-    <ion-label position="floating">Descrição:</ion-label>
-    <ion-input [(ngModel)]="gasto.descricao" ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Valor: R$</ion-label>
-    <ion-input [(ngModel)]="gasto.valorGasto" ></ion-input>
-  </ion-item>
+  <ion-content>
+    <ion-item>
+      <ion-label position="floating">Descricao:</ion-label>
+      <ion-input [(ngModel)]="gasto.descricao" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Valor: R$ </ion-label>
+      <ion-input [(ngModel)]="gasto.valorGasto" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Data de Regristro:</ion-label>
+      <ion-datetime
+
+        value="{{timestampSTR}}"
+        [(ngModel)] = "timestampSTR"
+         min="1930-01" max="2030"
+        [dayShortNames]="customDayShortNames"
+        displayFormat="DD MMM, YYYY"
+        cancelText="Cancelar"
+        doneText="OK"
+        monthShortNames="Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez"
+         ></ion-datetime>
+    </ion-item>
 
   <ion-item-divider></ion-item-divider>
   <ion-list>
@@ -26,7 +40,7 @@
 
       <ion-item *ngFor="let tipo of tipodeGasto; let i = index;">
         <ion-label >{{tipo}}</ion-label>
-        <ion-radio slot="end" value="{{i}}"></ion-radio>
+        <ion-radio slot="end" value="{{tipo}}"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
@@ -40,7 +54,7 @@
 
       <ion-item *ngFor="let forma of formaPagamento; let i = index;">
         <ion-label >{{forma}}</ion-label>
-        <ion-radio slot="end" value="{{i}}"></ion-radio>
+        <ion-radio slot="end" value="{{forma}}"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
@@ -54,7 +68,7 @@
 
       <ion-item *ngFor="let categoria of categorias; let i = index;">
         <ion-label >{{categoria}}</ion-label>
-        <ion-radio slot="end" value="{{i}}"></ion-radio>
+        <ion-radio slot="end" value="{{categoria}}"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
@@ -67,6 +81,7 @@
   </ion-toolbar>
 
   <ion-item-divider></ion-item-divider>
-  <ion-button expand="block" (click)="cadastrarGastos()">Salvar</ion-button>
+  <ion-button expand="block" (click)="updateGasto()">Salvar</ion-button>
+  <ion-button expand="block" color="danger" (click)="dismiss()">Voltar</ion-button>
 
 </ion-content>

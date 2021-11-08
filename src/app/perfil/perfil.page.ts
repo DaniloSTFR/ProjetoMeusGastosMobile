@@ -13,6 +13,7 @@ export class PerfilPage implements OnInit {
   @ViewChild('radioGroup') radioGroup: IonRadioGroup;
 
   public erroMsn: string;
+  public okMsn: string;
   public dataNascimento: string;
   escolaridades: Array<string>;
   generos: Array<string>;
@@ -86,10 +87,23 @@ export class PerfilPage implements OnInit {
       const nascimento = new Date(this.user.dataNascimento);
       this.user.dataNascimento = nascimento;
       await this.authService.updateDuUsuario(this.user);
+
+      this.okMsn = 'Atualizado com sucesso com Sucesso!';
+      await this.timeout(2000);
+      this.navCtrl.navigateRoot('folder/Inicio');
     } catch (error) {
+       this.erroMsn = 'Erro ao fazer atualização!';
       console.log('Error', error.code);
     }
 
+  }
+
+  timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  voltar() {
+     this.navCtrl.navigateRoot('folder/Inicio');
   }
 
 }
