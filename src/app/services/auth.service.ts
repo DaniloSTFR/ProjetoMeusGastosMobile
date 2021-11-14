@@ -107,7 +107,7 @@ export class AuthService {
     await this.fireAuth.currentUser.then( user => {
       this.userId = user.uid;
       //console.log(user);
-    });
+    }).then(()=>this.carregaDadosDoUsuario());
   }
 
   async userIsAuthenticated(){

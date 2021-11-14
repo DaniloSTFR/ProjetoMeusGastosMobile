@@ -18,7 +18,7 @@
   <ion-card class="welcome-card">
     <ion-card-header>
       <ion-card-title>Saldo Atual</ion-card-title>
-      <ion-card-subtitle>Salário: R$ 6.000,00</ion-card-subtitle>
+      <ion-card-subtitle>Salário: R$ {{ salario }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <canvas #doughnutCanvas style="position: relative; height:20vh; width:40vw"></canvas>
@@ -49,7 +49,10 @@
           {{ item.formaPagamento }}
           <br>
         </ion-col>
-
+        <ion-col size="12" size-lg>
+          {{ item.categoria }}
+          <br>
+        </ion-col>
         <ion-col size="12" size-lg>
           {{ getDatas(item.dataCriacao) }}
           <br>

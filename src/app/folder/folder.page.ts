@@ -24,12 +24,15 @@ export class FolderPage implements OnInit {
   @ViewChild('doughnutCanvas')  doughnutCanvas;
 
   doughnutChart: any;
+  user: any;
 
   public folder: string;
   public status: string;
   item$: Observable<any[]>;
   public erroMsn: string;
   public okMsn: string;
+  public salario = 0;
+  public debitos = 0;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,7 +43,7 @@ export class FolderPage implements OnInit {
     public modalController: ModalController,
     private alertCtrl: AlertController) {
 
-    this.carregarItem();
+
   }
 
   ionViewDidEnter() {
@@ -49,8 +52,15 @@ export class FolderPage implements OnInit {
 
   async carregarItem() {
     await this.gastosusuarioService.loadUserId();
+
     this.item$ = this.gastosusuarioService.getGastosUsuario();
-    //console.log(this.item$[0]);
+    await this.gastosusuarioService.carregaDadosDoUsuario();
+
+    this.salario = this.gastosusuarioService.user.salario;
+    this.user = this.gastosusuarioService.user;
+
+    const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    //console.log(this.item$[0] );
   }
 
   public getDatas(dataCriacao) {
@@ -64,6 +74,7 @@ export class FolderPage implements OnInit {
     if (this.folder === 'Sair') {
       this.efetuarLogout();
     }
+    this.carregarItem();
 
   }
 
@@ -74,7 +85,7 @@ export class FolderPage implements OnInit {
         labels: ['Credito', 'Débitos'],
         datasets: [{
           label: '# por tipo PG',
-          data: [1500, 4500,],
+          data: [6200, 2000,],
           backgroundColor: [
             'rgba(75, 192, 192, 0.2)',
             'rgba(255, 99, 132, 0.2)'

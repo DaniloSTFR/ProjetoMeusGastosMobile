@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class GastosUsuarioService {
   public userId=null;
+  public user: any;
 
   public formaPagamento = [
     'Dinheiro'
@@ -33,7 +34,8 @@ export class GastosUsuarioService {
     'Refeição',
     'Saúde',
     'Vestuário',
-    'Outras despesas variáveis.'
+    'Outras despesas variáveis.',
+    'Outras despesas fixas'
   ];
 
 
@@ -49,6 +51,10 @@ export class GastosUsuarioService {
       this.userId = user.uid;
       //console.log(user);
     });
+
+    await this.firestore.doc('du_usuario/'+this.userId).valueChanges({idField: 'docId'}).subscribe(user => {
+      this.user = user;
+    });
   }
 
 
@@ -61,6 +67,12 @@ export class GastosUsuarioService {
       ).valueChanges({idField: 'docId'});
   }
 
+  async carregaDadosDoUsuario(){
+    await this.firestore.doc('du_usuario/'+this.userId).valueChanges({idField: 'docId'}).subscribe(user => {
+      this.user = user;
+    });
+  }
+
   async registrarGasto(gasto){
     await this.loadUserId();
 
@@ -70,7 +82,7 @@ export class GastosUsuarioService {
       tipoGasto: this.tipodeGasto[gasto.tipoGasto],
       valorGasto: Number(gasto.valorGasto),
       dataCriacao: new Date(),
-      categoria: gasto.categoria,
+      categoria: this.categoria[gasto.categoria],
       uuid_Usuario: this.userId
     });
 
